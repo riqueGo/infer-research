@@ -8,14 +8,14 @@
         }
   ],
   "pulse-taint-sources": [
-      { "class_names": ["Simple"],
+      { "class_names": ["Assignment"],
         "kinds": ["SemanticConflict"],
         "taint_target": "InstanceReference",
         "method_names": ["getLeft"]
       }
   ],
   "pulse-taint-sinks": [
-      { "class_names": ["Simple"],
+      { "class_names": ["Assignment"],
         "kinds": ["SemanticConflict"],
         "taint_target": "InstanceReference",
         "method_names": ["getRight"]
