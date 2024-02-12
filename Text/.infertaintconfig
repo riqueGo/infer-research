@@ -1,0 +1,24 @@
+{
+  "pulse-taint-policies": [
+        { "short_description": "Semantic Conflict",
+          "taint_flows": [
+            { "source_kinds": ["SemanticConflict"],
+              "sink_kinds": ["SemanticConflict"] }
+          ]
+        }
+  ],
+  "pulse-taint-sources": [
+      { "class_names": ["Text"],
+        "kinds": ["SemanticConflict"],
+        "taint_target": "InstanceReference",
+        "method_names": ["normalizeWhitespace"]
+      }
+  ],
+  "pulse-taint-sinks": [
+      { "class_names": ["Text"],
+        "kinds": ["SemanticConflict"],
+        "taint_target": "InstanceReference",
+        "method_names": ["removeDuplicateWords"]
+      }
+  ]
+}
