@@ -1,0 +1,34 @@
+{
+  "pulse-taint-policies": [
+        { "short_description": "Semantic Conflict",
+          "taint_flows": [
+            { "source_kinds": ["SemanticConflict"],
+              "sink_kinds": ["SemanticConflict"] }
+          ]
+        }
+  ],
+  "pulse-taint-sources": [
+      { "class_names": ["Class.Class", "Class.HelperClass"],
+        "kinds": ["SemanticConflict"],
+        "taint_target": "InstanceReference",
+        "method_names": ["changeLeftTo1"]
+      },
+      { "class_names": ["Class.HelperClass"],
+        "kinds": ["SemanticConflict"],
+        "field_names": ["leftAttribute"],
+        "taint_target": "GetField"
+      }
+  ],
+  "pulse-taint-sinks": [
+      { "class_names": ["Class.Class", "Class.HelperClass"],
+        "kinds": ["SemanticConflict"],
+        "taint_target": "InstanceReference",
+        "method_names": ["changeRightTo1", "changeLeftAndRightTo2"]
+      },
+      { "class_names": ["Class.HelperClass"],
+      "kinds": ["SemanticConflict"],
+      "field_names": ["leftAttribute"],
+      "taint_target": "GetField"
+    }
+  ]
+}
