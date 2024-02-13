@@ -1,32 +1,27 @@
 /**
- * @command: infer --pulse-only --pulse-taint-config ./.infertaintconfig -- javac ./POO.java
+ * @command: infer --pulse-only --pulse-taint-config ./.infertaintconfig -- javac ./Class.java ./HelperClass.java
 */
 
 package Class;
 
 public class Class {
 
+    /**
+     * There is no data flow, it shouldn't trigger a conflict
+    */
     private void changeLeftAndRightSeparately() {
         HelperClass helperClass = new HelperClass();
-        helperClass.changeLeftTo1();//left operation
+        helperClass.setLeftAttribute(1);//left operation
         base();
-        helperClass.changeRightTo1(); //right operation
+        helperClass.setRightAttribute(1); //right operation
     }
 
     private void changeLeftAndRightTogether() {
         HelperClass helperClass = new HelperClass();
-        helperClass.changeLeftTo1();//left operation
+        helperClass.setLeftAttribute(1);//left operation
         base();
-        helperClass.changeLeftAndRightTo2(); //right operation
+        helperClass.changeLeftAndRight(5); //right operation
     }
 
     private void base(){}
-
-    private <T> T getLeft(T value) {
-        return value;
-    }
-
-    private <T> T getRight(T value) {
-        return value;
-    }
 }

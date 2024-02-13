@@ -4,16 +4,21 @@ public class HelperClass {
     public int leftAttribute;
     public int rightAttribute;
 
-    public void changeLeftTo1() {
-        this.leftAttribute = 1;
+    public HelperClass(){
+        this.leftAttribute = 0;
+        this.rightAttribute= 0;
     }
 
-    public void changeRightTo1() {
-        this.rightAttribute = 1;
+    public void setLeftAttribute(int value) {
+        this.leftAttribute = value;
     }
 
-    public void changeLeftAndRightTo2(){
-        this.leftAttribute = 2;
-        this.rightAttribute = 2;
+    public void setRightAttribute(int value) {
+        this.rightAttribute = value;
+    }
+
+    public void changeLeftAndRight(int value){
+        this.rightAttribute = this.leftAttribute;
+        this.leftAttribute = value;
     }
 }
