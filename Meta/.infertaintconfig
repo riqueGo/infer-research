@@ -1,0 +1,15 @@
+{
+  "force-delete-results-dir": true,
+  "pulse-taint-sources": [
+    { "class_names": ["Meta.Fields"],
+      "field_names": ["sourceField"],
+      "taint_target": "GetField"
+    }
+  ],
+  "pulse-taint-sinks": [
+    { "class_names": ["Meta.Fields"],
+      "field_names": ["sinkField"],
+      "taint_target": "SetField"
+    }
+  ]
+}

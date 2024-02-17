@@ -1,6 +1,0 @@
-"taint_target": ["ArgumentsMatchingTypes",["SensitiveClass"]]
-"taint_target": ["ArgumentPositions", [0]]
-"taint_target": "SetField"
-
-"field_names": ["sourceField"],
-"taint_target": "GetField"
