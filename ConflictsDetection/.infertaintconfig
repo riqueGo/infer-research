@@ -1,0 +1,24 @@
+{
+  "pulse-taint-sources": [
+    { "procedure": "defLeft" },
+    { "class_names": [
+        "ConflictsDetection.Experiments", 
+        "ConflictsDetection.Account",
+        "ConflictsDetection.Infer"
+      ],
+      "field_names": [],
+      "taint_target": "GetField"
+    }
+  ],
+  "pulse-taint-sinks": [
+    { "procedure": "useRight" },
+    { "class_names": [
+        "ConflictsDetection.Experiments", 
+        "ConflictsDetection.Account",
+        "ConflictsDetection.Infer"
+      ],
+      "field_names": [],
+      "taint_target": "SetField"
+    }
+  ]
+}
