@@ -10,7 +10,7 @@ public class Person {
         this.age = age;
         this.address = address;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -28,5 +28,10 @@ public class Person {
     }
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public void celebrateBirthday() {
+        age++;
+        System.out.println("Happy birthday! You are now " + age + " years old.");
     }
 }

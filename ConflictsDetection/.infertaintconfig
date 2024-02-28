@@ -1,10 +1,13 @@
 {
   "pulse-taint-sources": [
     { "procedure": "defLeft" },
+    { "procedure": "rightSetBalance" },
     { "class_names": [
         "ConflictsDetection.Experiments", 
         "ConflictsDetection.Account",
-        "ConflictsDetection.Infer"
+        "ConflictsDetection.Infer",
+        "ConflictsDetection.AccountType",
+        "ConflictsDetection.Person"
       ],
       "field_names": [],
       "taint_target": "GetField"
@@ -12,10 +15,15 @@
   ],
   "pulse-taint-sinks": [
     { "procedure": "useRight" },
+    { "procedure": "useLeft" },
+    { "procedure": "celebrateBirthday" },
+    { "procedure": "deposit" },
     { "class_names": [
         "ConflictsDetection.Experiments", 
         "ConflictsDetection.Account",
-        "ConflictsDetection.Infer"
+        "ConflictsDetection.Infer",
+        "ConflictsDetection.AccountType",
+        "ConflictsDetection.Person"
       ],
       "field_names": [],
       "taint_target": "SetField"
