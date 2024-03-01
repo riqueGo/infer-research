@@ -6,6 +6,8 @@ package ConflictsDetection;
 
 public class Experiments {
 
+    private static int staticField = 0;
+
     // Original program
     public void leftDefAndRightUseItBase() {
         Account acc = new Account("1", 0, AccountType.SAVING);
@@ -73,6 +75,13 @@ public class Experiments {
         acc.setOwner(person);
         base();
         System.out.println(Infer.useRight(acc.getOwner().getAge())); //right
+    }
+
+    //
+    public void leftDefFieldAndRightUseItInferConflict() {
+        staticField = 1; //left
+        base();
+        System.out.println(Infer.useRight(staticField)); //right
     }
 
     //############################### Not Conflict ###############################
@@ -150,7 +159,17 @@ public class Experiments {
         acc.setOwner(person);
         base();
         person.celebrateBirthday(); //right
-        acc.deposit(100); //right
+        accDeposit100(acc); //right
+    }
+
+    private void accDeposit100(Account acc) {
+        acc.deposit(100);
+    }
+
+    //############################### It should hasn't a conflict ###############################
+
+    public void leftDefFieldAndRightUseItInferNotConflict() {
+        System.out.println(Infer.useRight(staticField)); //right
     }
 
     private void base(){}

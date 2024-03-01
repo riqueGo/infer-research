@@ -9,7 +9,7 @@
         "ConflictsDetection.AccountType",
         "ConflictsDetection.Person"
       ],
-      "field_names": [],
+      "field_names": ["staticField"],
       "taint_target": "GetField"
     }
   ],
@@ -17,6 +17,7 @@
     { "procedure": "useRight" },
     { "procedure": "useLeft" },
     { "procedure": "celebrateBirthday" },
+    { "procedure": "accDeposit100" },
     { "procedure": "deposit" },
     { "class_names": [
         "ConflictsDetection.Experiments", 
