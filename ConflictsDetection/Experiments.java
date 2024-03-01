@@ -77,7 +77,7 @@ public class Experiments {
         System.out.println(Infer.useRight(acc.getOwner().getAge())); //right
     }
 
-    //
+    //Conflict using fields config
     public void leftDefFieldAndRightUseItInferConflict() {
         staticField = 1; //left
         base();
@@ -110,7 +110,7 @@ public class Experiments {
     public void leftDefBaseDefAndRightUseItInferNotConflict() {
         Account acc = new Account("1", Infer.defLeft(100), AccountType.SAVING); // left
         base();
-        acc.setBalance(acc.getBalance()+100); //base
+        acc.setBalance(100); //base
         String message = Infer.useRight(new StringBuilder()
             .append("Account: ").append(acc.getAccountNumber())
             .append("\nBalance: ").append(acc.getBalance()) //right
@@ -150,7 +150,7 @@ public class Experiments {
         System.out.println(Infer.useRight(acc.getOwner().getName())); //right
     }
 
-    //############################### It should has a conflict ###############################
+    //############################### there should be conflict ###############################
 
     //It should have a conflict however Infer doesn't catch
     public void leftDefAndRightUseItByFunctionInferConflict() {
@@ -166,8 +166,27 @@ public class Experiments {
         acc.deposit(100);
     }
 
-    //############################### It should hasn't a conflict ###############################
+    /*  
+     * Left change has been extracted
+     * Whole Right attribution was extracted
+     * There whould be a conflict since
+     * base uses balance changed by left to def a new balance
+     */
+    public void leftDefBaseDefAndRightUseItInferConflict() {
+        Account acc = new Account("1", Infer.defLeft(100), AccountType.SAVING); // left
+        base();
+        acc.setBalance(acc.getBalance()+100); //base
+        String message = Infer.useRight(new StringBuilder()
+            .append("Account: ").append(acc.getAccountNumber())
+            .append("\nBalance: ").append(acc.getBalance()) //right
+            .toString()
+        );
+        System.out.println(message);
+    }
 
+    //############################### there should be no conflict ###############################
+
+    //When a field in config as source is used by sink method, it gets error 
     public void leftDefFieldAndRightUseItInferNotConflict() {
         System.out.println(Infer.useRight(staticField)); //right
     }
