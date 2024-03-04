@@ -44,8 +44,14 @@ public class Account {
         this.accountType = accountType;
     }
 
+    //Taint doesn't works
     public void deposit(double amount) {
         balance += amount;
+        System.out.println(amount + " deposited. New balance is: " + balance);
+    }
+
+    //Taint works
+    public void depositOnlyPrint(double amount) {
         System.out.println(amount + " deposited. New balance is: " + balance);
     }
 }

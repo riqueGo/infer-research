@@ -30,8 +30,9 @@ public class Person {
         this.address = address;
     }
 
+    //Taint doesn't works
     public void celebrateBirthday() {
         age++;
-        System.out.println("Happy birthday! You are now " + age + " years old.");
+        System.out.println("Happy birthday! You are now " + this.age + " years old.");
     }
 }
