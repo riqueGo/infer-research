@@ -4,13 +4,12 @@ import java.util.function.Function;
 
 public class FalseNegativeConflictsExperiments {
     
-    //It should have a conflict however Infer doesn't catch
+    /*  
+     * It doesn't get conflict extracting method
+     */
     public void leftDefAndRightUseItByFunctionInferConflict() {
         Account acc = new Account("1", Infer.defLeft(100), AccountType.SAVING); //left
-        Person person = new Person("Henrique", Infer.defLeft(24), "Rua do Sol"); //left
-        acc.setOwner(person);
         ExperimentsHelper.base();
-        person.celebrateBirthday(); //right
         accDeposit100(acc); //right
     }
 
@@ -18,12 +17,14 @@ public class FalseNegativeConflictsExperiments {
         acc.deposit(100);
     }
 
-    // With Functional Aproach
+    /*  
+     * It doesn't get conflict with functional approach
+     */
     public void leftDefAndRightUseItByFunctionInferConflict2() {
         Account acc = new Account("1", Infer.defLeft(100), AccountType.SAVING); //left
         ExperimentsHelper.base();
 
-        Function<Account, Account> depositFunction = account -> {
+        Function<Account, Account> depositFunction = account -> { //right
             account.deposit(100);
             return account;
         };
@@ -31,16 +32,42 @@ public class FalseNegativeConflictsExperiments {
         Infer.useRight(acc, depositFunction);
     }
 
-    // With Functional Aproach and depositOnlyPrint method
+    /*  
+     * It doesn't get conflict even though depositOnlyPrint is in pulse-taint-sinks
+     */
     public void leftDefAndRightUseItByFunctionInferConflict3() {
         Account acc = new Account("1", Infer.defLeft(100), AccountType.SAVING); //left
         ExperimentsHelper.base();
-        Function<Account, Account> depositFunction = account -> {
+        acc.depositOnlyPrint(100); //right
+    }
+
+    /*  
+     * With Functional Aproach and depositOnlyPrint method
+     * It gets conflict because depositOnlyPrint doesn't define balance, only uses
+     */
+    public void leftDefAndRightUseItByFunctionInferConflict4() {
+        Account acc = new Account("1", Infer.defLeft(100), AccountType.SAVING); //left
+        ExperimentsHelper.base();
+        Function<Account, Account> depositFunction = account -> { //right
             account.depositOnlyPrint(100);
             return account;
         };
 
         Infer.useRight(acc, depositFunction);
+    }
+
+    /*  
+     * extracting depositOnlyPrint method to accDeposit100OnlyPrint
+     * It gets conflict because depositOnlyPrint doesn't define balance, only uses
+     */
+    public void leftDefAndRightUseItByFunctionInferConflict5() {
+        Account acc = new Account("1", Infer.defLeft(100), AccountType.SAVING); //left
+        ExperimentsHelper.base();
+        accDeposit100OnlyPrint(acc); //right
+    }
+
+    private void accDeposit100OnlyPrint(Account acc) {
+        acc.depositOnlyPrint(100);
     }
 
     /*  

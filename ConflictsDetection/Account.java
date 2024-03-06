@@ -44,13 +44,14 @@ public class Account {
         this.accountType = accountType;
     }
 
-    //Taint doesn't works
+    //Infer doesn't catch balance useRight
     public void deposit(double amount) {
+        // Infer.useRight(this.balance); // <- this works for Infer
         balance += amount;
         System.out.println(amount + " deposited. New balance is: " + balance);
     }
 
-    //Taint works
+    //Infer catch balance useRight
     public void depositOnlyPrint(double amount) {
         System.out.println(amount + " deposited. New balance is: " + balance);
     }
