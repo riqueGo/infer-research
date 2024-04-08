@@ -47,12 +47,14 @@ public class Account {
     //Infer doesn't catch balance useRight
     public void deposit(double amount) {
         // Infer.useRight(this.balance); // <- this works for Infer
-        balance += amount;
+        balance = balance + amount;
         System.out.println(amount + " deposited. New balance is: " + balance);
     }
 
     //Infer catch balance useRight
-    public void depositOnlyPrint(double amount) {
+    public void depositWorks(double amount) {
+        Infer.useRight(balance); // <- this works for Infer
+        balance = balance + amount;
         System.out.println(amount + " deposited. New balance is: " + balance);
     }
 }

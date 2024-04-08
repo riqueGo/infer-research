@@ -38,7 +38,7 @@ public class FalseNegativeConflictsExperiments {
     public void leftDefAndRightUseItByFunctionInferConflict3() {
         Account acc = new Account("1", Infer.defLeft(100), AccountType.SAVING); //left
         ExperimentsHelper.base();
-        acc.depositOnlyPrint(100); //right
+        acc.depositWorks(100); //right
     }
 
     /*  
@@ -49,7 +49,7 @@ public class FalseNegativeConflictsExperiments {
         Account acc = new Account("1", Infer.defLeft(100), AccountType.SAVING); //left
         ExperimentsHelper.base();
         Function<Account, Account> depositFunction = account -> { //right
-            account.depositOnlyPrint(100);
+            account.depositWorks(100);
             return account;
         };
 
@@ -67,7 +67,19 @@ public class FalseNegativeConflictsExperiments {
     }
 
     private void accDeposit100OnlyPrint(Account acc) {
-        acc.depositOnlyPrint(100);
+        acc.depositWorks(100);
+    }
+
+    public void leftDefAndRightUseItByFunctionInferConflict6() {
+        Account acc = new Account("1", 100, AccountType.SAVING); //left
+        ExperimentsHelper.base();
+
+        Function<Account, Account> depositFunction = account -> { //right
+            account.deposit(100);
+            return account;
+        };
+
+        Infer.useRight(acc, depositFunction);
     }
 
     /*  
