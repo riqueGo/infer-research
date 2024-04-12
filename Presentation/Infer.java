@@ -25,4 +25,7 @@ public class Infer {
     }
 
     public static void useRight(Runnable runnable) {runnable.run();}
+
+    public static void useBase(Runnable runnable) {runnable.run();}
+
 }

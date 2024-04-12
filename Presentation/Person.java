@@ -21,7 +21,7 @@ public class Person {
     }
 
     public void celebrateBirthday() {
-        age++;
+        age = age + 1;
         System.out.println("Happy birthday! You are now " + this.age + " years old.");
     }
 }

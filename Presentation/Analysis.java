@@ -5,27 +5,28 @@ public class Analysis {
     * exemeplo básico
     */
     public void analize1() {
-        Person person = new Person("Henrique", 24); //left change age
+        Person person = new Person("Henrique", 24); //Left change age
         base();
-        int rightReceive = Infer.useRight(person.getAge());
+        Infer.useRight(person.getAge()); //Right use it
     }
 
     /*
      * @configFile .inferconfig1
      */
     public void analize2() {
-        Person person = new Person("Henrique", 24); //left change age
+        Person person = new Person("Henrique", 24); //Left change age
         base();
         Infer.useRight(() -> person.celebrateBirthday()); //Right use it and define it
     }
 
     /*
      * @configFile .inferconfig2
+     * como saber qual campo sendo alterado?
      */
     public void analize3() {
         Person person = new Person("Henrique", 24);
         base();
-        Infer.useLeft(() -> person.celebrateBirthday()); //left use and define age
+        Infer.useLeft(() -> person.celebrateBirthday()); //Left use and define age
         base();
         Infer.useRight(() -> person.celebrateBirthday()); //right use and define age
     }
@@ -36,18 +37,17 @@ public class Analysis {
      */
     public void analize4() {
         Person person = new Person("Henrique", 24);
-        Infer.useLeft(() -> person.setName("Luiz")); //left change name
+        Infer.useLeft(() -> person.setName("Luiz")); //Left change name
         base();
-        String rightReceive = Infer.useRight(person.getName());
+        String rightReceive = Infer.useRight(person.getName()); //right use it
     }
 
     /*
-     * @configFile .inferconfig2
+     * @configFile .inferconfig3
      * Como verificar que campos definidos estão sendo passados para outras funções?
      */
     public void analize5() {
-        Person person = new Person("Henrique", 24);
-        Infer.useLeft(() -> person.setName("Luiz")); //left change name
+        Person person = new Person("Henrique", 24); //Left change name from "Luiz" to "Henrique"
         base();
         if (isABigName(person.getName())) { //base
             System.out.println("Is a big name");
@@ -56,9 +56,30 @@ public class Analysis {
         }
     }
 
-    public void base(){}
-
     public Boolean isABigName(String name) {
         return name.length() >= Infer.useRight(8); //right changed from 4 to 8
     }
+
+    /*
+     * @configFile .inferconfig4
+     * Essa relação de def-use apenas por função não captura conflitos internos de metodos
+     */
+    public void analize6() {
+        Person person = new Person("Henrique", Infer.defLeft(24)); //Left change age
+        base();
+        Infer.useRight(() -> person.celebrateBirthday()); //Right use it and define it
+    }
+
+    /*
+     * @configFile .inferconfig5
+     * exemeplo básico
+     */
+    public void analize7() {
+        Person person = new Person("Henrique", 24); //Left change age
+        Infer.useBase(() -> person.setAge(20)); //base
+        Infer.useRight(person.getAge()); //Right use it
+    }
+
+    public void base(){}
+
 }

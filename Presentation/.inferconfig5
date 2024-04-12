@@ -3,11 +3,17 @@
     { "class_names": [
         "Person"
       ],
-      "field_names": ["name"],
+      "field_names": ["age"],
       "taint_target": "GetField"
     }
   ],
   "pulse-taint-sinks": [
     { "procedure": "useRight" }
+  ],
+  "pulse-taint-sanitizers": [
+    { "procedure": "useBase" },
+    { "class_names": ["Person"],
+      "method_names": ["setAge"]
+    }
   ]
 }
