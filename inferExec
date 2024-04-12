@@ -1,0 +1,1 @@
+infer --pulse-only --pulse-taint-config ./.inferconfig -- javac ./*.java

@@ -1,0 +1,13 @@
+{
+  "pulse-taint-sources": [
+    { "class_names": [
+        "Person"
+      ],
+      "field_names": ["age"],
+      "taint_target": "GetField"
+    }
+  ],
+  "pulse-taint-sinks": [
+    { "procedure": "useRight" }
+  ]
+}
