@@ -26,6 +26,10 @@ public class Infer {
 
     public static void useRight(Runnable runnable) {runnable.run();}
 
+    public static <T> T useBase(T value) {
+        return value;
+    }
+
     public static void useBase(Runnable runnable) {runnable.run();}
 
 }

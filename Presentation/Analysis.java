@@ -57,11 +57,12 @@ public class Analysis {
     }
 
     public Boolean isABigName(String name) {
-        return name.length() >= Infer.useRight(8); //right changed from 4 to 8
+        return Infer.useRight(Infer.useRight(name).length()) >= Infer.useRight(8); //right changed from 4 to 8
     }
 
     /*
      * @configFile .inferconfig4
+     * Algoritmo Antigo
      * Essa relação de def-use apenas por função não captura conflitos internos de metodos
      */
     public void analize6() {
