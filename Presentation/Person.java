@@ -8,13 +8,13 @@ public class Person {
     }
 
     public String getName() {
-        return name;
+        return Infer.right(name);
     }
     public void setName(String name) {
         this.name = name;
     }
     public int getAge() {
-        return age;
+        return Infer.right(age);
     }
     public void setAge(int age) {
 //        this.age = Infer.useBase(age);
@@ -22,7 +22,7 @@ public class Person {
     }
 
     public void celebrateBirthday() {
-        age = age + 1;
-        System.out.println("Happy birthday! You are now " + this.age + " years old.");
+        age = Infer.right(age) + Infer.right(1);
+        Infer.right(() -> System.out.println(Infer.right("Happy birthday! You are now ") + Infer.right(age) + Infer.right(" years old.")));
     }
 }

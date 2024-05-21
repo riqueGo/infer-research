@@ -1,8 +1,13 @@
 {
   "pulse-taint-sources": [
-    { "procedure": "useLeft" }
+    { "class_names": [
+        "Person"
+      ],
+      "field_names": ["name"],
+      "taint_target": "GetField"
+    }
   ],
   "pulse-taint-sinks": [
-    { "procedure": "useRight" }
+    { "procedure": "right" }
   ]
 }

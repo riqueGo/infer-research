@@ -1,35 +1,14 @@
-import java.util.function.Function;
-
 public class Infer {
     
-    public static <T> T defLeft(T value) {
+    public static <T> T left(T value) {
         return value;
     }
 
-    public static void defLeft(Runnable runnable) {runnable.run();}
+    public static void left(Runnable runnable) {runnable.run();}
 
-    public static <T> T useLeft(T value) {
+    public static <T> T right(T value) {
         return value;
     }
 
-    public static void useLeft(Runnable runnable) {runnable.run();}
-
-    public static <T> T defRight(T value) {
-        return value;
-    }
-
-    public static void defRight(Runnable runnable) {runnable.run();}
-
-    public static <T> T useRight(T value) {
-        return value;
-    }
-
-    public static void useRight(Runnable runnable) {runnable.run();}
-
-    public static <T> T useBase(T value) {
-        return value;
-    }
-
-    public static void useBase(Runnable runnable) {runnable.run();}
-
+    public static void right(Runnable runnable) {runnable.run();}
 }

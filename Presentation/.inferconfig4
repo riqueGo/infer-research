@@ -1,8 +1,8 @@
 {
   "pulse-taint-sources": [
-    { "procedure": "defLeft" }
+    { "procedure": "left" }
   ],
   "pulse-taint-sinks": [
-    { "procedure": "useRight" }
+    { "procedure": "right" }
   ]
 }

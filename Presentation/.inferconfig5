@@ -8,9 +8,9 @@
     }
   ],
   "pulse-taint-sinks": [
-    { "procedure": "useRight" }
+    { "procedure": "right" }
   ],
   "pulse-taint-sanitizers": [
-    { "procedure": "useBase" }
+    { "procedure": "base" }
   ]
 }
