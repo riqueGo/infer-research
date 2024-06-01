@@ -1,11 +1,6 @@
 {
   "pulse-taint-sources": [
-    { "class_names": [
-        "Text"
-      ],
-      "field_names": ["text"],
-      "taint_target": "GetField"
-    }
+    { "procedure": "left" }
   ],
   "pulse-taint-sinks": [
     { "procedure": "right" }

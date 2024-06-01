@@ -23,6 +23,6 @@ public class Person {
 
     public void celebrateBirthday() {
         age = Infer.right(age) + Infer.right(1);
-        Infer.right(() -> System.out.println(Infer.right("Happy birthday! You are now ") + Infer.right(age) + Infer.right(" years old.")));
+        System.out.println(Infer.right("Happy birthday! You are now ") + Infer.right(age) + Infer.right(" years old."));
     }
 }
