@@ -94,12 +94,15 @@ public class Analysis {
         System.out.println(Infer.right(z));
     }
 
-    public void analize11() {
-        boolean a = Infer.left(true);
-        base();
-        boolean b = Infer.right(false);
 
-        if(Infer.right(Infer.left(a && b))) {
+    //Não é DF
+    //É CF (Confluence Flow)
+    public void analize11() {
+        boolean a = true; // left altera a
+        base();
+        boolean b = false; //right altera b
+
+        if(a && b) { //a e b são utilizados na condicional
             //Do Something
         }
     }
@@ -114,11 +117,14 @@ public class Analysis {
         }
     }
 
+    //Não é DF
+    //É um PDG (Program Dependence Graph)
     public void analize13() {
-        String s = Infer.left("test"); //left change s value
+        String s ="test"; //left altera valor de s
         base();
-        if(Infer.right(Infer.left(s.length() > 4))) { //right changed 3 to 4
-            //Do something
+        if(s.length() >= 4) { //s é utilizado na condicional
+            base();
+            foo1(); //right chama uma função
         }
     }
 
@@ -131,6 +137,21 @@ public class Analysis {
         Person person2 = new Person("Luiz", 24);
         base();
         Infer.right(person2.getAge()); //Right use it
+    }
+
+    //É DF
+    public void analize15() {
+        int x = Infer.left(10);
+        int y = x;
+        int z = Infer.right(y);
+    }
+
+    //É DF
+    public void analize16(boolean a) {
+        int x = Infer.left(10);
+        if(a) {
+            Infer.right(() -> foo3(x));
+        }
     }
 
     public int foo1() {
