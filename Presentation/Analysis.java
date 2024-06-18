@@ -37,7 +37,7 @@ public class Analysis {
         Person person = new Person("Henrique", 24);
         person.setName("Luiz"); //Left change name
         base();
-        String rightReceive = Infer.right(person.getName()); //right use it
+        String rightReceive = Infer.right(person.getNameOrLastName(false)); //right use it
     }
 
     /*
@@ -139,11 +139,22 @@ public class Analysis {
         Infer.right(person2.getAge()); //Right use it
     }
 
-    //É DF
-    public void analize15() {
+    /*
+     * @configFile .inferconfig1
+     */
+    public void analize15(int w) {
         int x = Infer.left(10);
         int y = x;
-        int z = Infer.right(y);
+        int a = Infer.right(y); // reporta
+        int z = Infer.right(y+10); // não reporta
+        int p = Infer.right(y+w);  // não reporta
+        Infer.right(() -> System.out.println(y));  //  reporta
+        Infer.right(() -> System.out.println(y+10));  // reporta
+        Infer.right(foo4(y+10)); //foo4 retorna valor  // não reporta
+        Infer.right(() -> foo4(y+10));  // reporta
+        Infer.right(y+10);  // não reporta
+        System.out.println(z);
+        System.out.println(p);
     }
 
     //É DF
@@ -152,6 +163,39 @@ public class Analysis {
         if(a) {
             Infer.right(() -> foo3(x));
         }
+    }
+
+    public void analize17() {
+        Person person = new Person("Henrique", 24);
+        base();
+        person.celebrateBirthday();
+    }
+
+    public void analize18(boolean b) {
+        Person person = new Person("Henrique", 24);
+        person.setName("Luiz"); //Left change name
+        base();
+        String rightReceive = Infer.right(person.getNameOrLastName(b)); //right use it
+    }
+
+    public void analize19() {
+        Person person = new Person("Henrique", 24); //Left change age
+        int x = Infer.left(10);
+        base();
+        Person person2 = Infer.right(new Person("Luiz", person.getAge())); //Right use it
+        Person person3 = Infer.right(new Person("Luiz", x)); //Right use it
+    }
+
+    public void analize20() {
+        int x = Infer.left(10);
+        int y = x;
+        Infer.right(x++);
+        Infer.right(x += 1);
+        x += Infer.right( 1);
+        Infer.right(++x);
+        x = Infer.right(x + 1);
+        Infer.right(() -> foo4(y));
+        Infer.right(x);
     }
 
     public int foo1() {

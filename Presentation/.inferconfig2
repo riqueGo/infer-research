@@ -1,9 +1,10 @@
 {
   "pulse-taint-sources": [
+  { "procedure": "left" },
     { "class_names": [
         "Person"
       ],
-      "field_names": ["name"],
+      "field_names": ["age"],
       "taint_target": "GetField"
     }
   ],

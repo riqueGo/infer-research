@@ -7,9 +7,9 @@ public class Text {
 
     void cleanText() {
         //conflict!
-        normalizeWhitespace();
+        normalizeWhitespace(); //left change
         removeComments();
-        removeDuplicateWords();
+        removeDuplicateWords(); //right change
     }
 
     // Contribution 1
@@ -23,16 +23,16 @@ public class Text {
     // Contribution 2
     void removeDuplicateWords() {
         // removes duplicate words without normalizing whitespaces
-        String[] words = text.split("\\s+");
-        Stack<String> st = new Stack<>();
-        for (int i = 0; i < words.length; i++) {
-            if (st.isEmpty() || st.peek() != words[i]) {
-                st.push(words[i]);
+        String[] words = Infer.right(text.split("\\s+"));
+        Stack<String> st = Infer.right(new Stack<>());
+        for (int i = Infer.right(0); Infer.right(i < words.length); Infer.right(i++)) {
+            if (Infer.right(st.isEmpty() || st.peek() != words[i])) {
+                Infer.right(st.push(words[i]));
             } else {
-                st.push(" ");
+                Infer.right(st.push(" "));
             }
         }
-        text = String.join(" ", st);
+        text = Infer.right(String.join(" ", st));
     }
 
     int countFixes() {

@@ -1,5 +1,6 @@
 public class Person {
     private String name;
+    private String lastName;
     private int age;
 
     public Person(String name, int age) {
@@ -8,8 +9,21 @@ public class Person {
     }
 
     public String getName() {
-        return Infer.right(name);
+        return name;
     }
+
+    public String getNameOrLastName(Boolean b) {
+        if(b) {
+            return name;
+        }
+        return lastName;
+    }
+
+    public void incAgeAndName(int age, String name) {
+        this.age += age;
+        this.name += name;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -22,7 +36,7 @@ public class Person {
     }
 
     public void celebrateBirthday() {
-        age = Infer.right(age) + Infer.right(1);
-        System.out.println(Infer.right("Happy birthday! You are now ") + Infer.right(age) + Infer.right(" years old."));
+        age++;
+        System.out.println("Happy birthday! You are now " + age + " years old.");
     }
 }
